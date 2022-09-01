@@ -9,7 +9,7 @@ on:
         required: true
         default: 'lined-up'
         type: choice
-        choices:
+        options:
           - 'lined-up'
           - 'one-space'
       file-path:
