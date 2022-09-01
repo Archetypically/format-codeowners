@@ -14,13 +14,13 @@ on:
           - 'one-space'
       file-path:
         description: |
-          Optional. The path to the CODEOWNERS file to operate on.
-          Otherwise searches for valid CODEOWNERS files in the repository.
+          The path to the CODEOWNERS file to operate on.
+          Leave blank to search for all valid CODEOWNERS.
         required: false
         default: .github/CODEOWNERS
         type: string
       remove-empty-lines:
-        description: Whether or not to remove empty lines. Defaults to 'false'.
+        description: Remove empty lines?
         type: boolean
         default: false
         required: false
