@@ -1,0 +1,50 @@
+---
+name: Format CODEOWNERS using the action from the Marketplace.
+
+on:
+  workflow_dispatch:
+    inputs:
+      format-style:
+        description: 'The style of format to apply.'
+        required: true
+        default: 'lined-up'
+        type: choice
+        options:
+          - 'lined-up'
+          - 'one-space'
+      file-path:
+        description: |
+          The path to the CODEOWNERS file to operate on.
+          Leave blank to search for all valid CODEOWNERS.
+        required: false
+        default: .github/CODEOWNERS
+        type: string
+      remove-empty-lines:
+        description: Remove empty lines?
+        type: boolean
+        default: false
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  format-codeowners:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: Archetypically/format-codeowners@v0.0.2-rc
+        id: format-codeowners
+        with:
+          format-style: ${{ github.event.inputs.format-style }}
+          file-path: ${{ github.event.inputs.file-path }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        if: steps.format-codeowners.outputs.formatted-files != ''
+        with:
+          commit_message: Reformat CODEOWNERS
+          commit_options: '--no-verify --signoff'
+          file_pattern: ${{ steps.format-codeowners.outputs.formatted-files }}
+          disable_globbing: true
+          push_options: '--force'
