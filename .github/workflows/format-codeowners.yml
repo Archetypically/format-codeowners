@@ -42,3 +42,4 @@ jobs:
           commit_options: '--no-verify --signoff'
           file_pattern: ${{ steps.format-codeowners.outputs.formatted-files }}
           disable_globbing: true
+          push_options: '--force'
