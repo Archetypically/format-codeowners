@@ -3,7 +3,7 @@ name: 'Format CODEOWNERS'
 author: '@Archetypically'
 branding:
   icon: file-text
-  colour: yellow
+  color: yellow
 description: Formats CODEOWNERS files. Does not commit any files.
 inputs:
   format-style:
