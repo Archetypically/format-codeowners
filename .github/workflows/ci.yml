@@ -1,0 +1,45 @@
+---
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      revision:
+        description: 'The revision to run CI on.'
+        required: false
+        default: main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.revision }}
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: install dependencies
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+
+      - name: run format checks
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: 'format:check'
+
+      - name: run linter
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: 'lint:check'
+
+      - name: run tests
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: 'test'
