@@ -9,7 +9,24 @@ This GitHub Action will clean up and format your CODEOWNERS file.
 ### Example
 
 ```yaml
+---
+name: Format CODEOWNERS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CODEOWNERS'
+
+jobs:
+  format-codeowners:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
     - uses: Archetypically/format-codeowners@v1
+      id: format-codeowners
       with:
         # Optional. The path to the CODEOWNERS file to format. Will auto-detect if not passed in.
         file-path: CODEOWNERS
@@ -61,6 +78,7 @@ Note: this Action will not commit files back to the repository; you can use some
 
 ```yaml
     - uses: stefanzweifel/git-auto-commit-action@v4
+      if: steps.format-codeowners.outputs.formatted-files != ''
       with:
         # Optional. Commit message for the created commit.
         # Defaults to "Apply automatic changes"
@@ -75,7 +93,7 @@ Note: this Action will not commit files back to the repository; you can use some
         # See the `pathspec`-documentation for git
         # - https://git-scm.com/docs/git-add#Documentation/git-add.txt-ltpathspecgt82308203
         # - https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec
-        file_pattern: CODEOWNERS .github/CODEOWNERS docs/CODEOWNERS
+        file_pattern: ${{ steps.format-codeowners.outputs.formatted-files }}
 
         # Optional. Prevents the shell from expanding filenames.
         # Details: https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html
