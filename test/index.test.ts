@@ -19,12 +19,12 @@ const TEST_CODEOWNERS_FILE_CONTENTS = String(
 );
 
 beforeAll(() => {
-  jest.spyOn(core, 'debug').mockImplementation(() => {});
-  jest.spyOn(core, 'info').mockImplementation(() => {});
-  jest.spyOn(core, 'error').mockImplementation(() => {});
-  jest.spyOn(core, 'notice').mockImplementation(() => {});
-  jest.spyOn(core, 'setOutput').mockImplementation(() => {});
-  jest.spyOn(core, 'setFailed').mockImplementation(() => {});
+  jest.spyOn(core, "debug").mockImplementation(() => {});
+  jest.spyOn(core, "info").mockImplementation(() => {});
+  jest.spyOn(core, "error").mockImplementation(() => {});
+  jest.spyOn(core, "notice").mockImplementation(() => {});
+  jest.spyOn(core, "setOutput").mockImplementation(() => {});
+  jest.spyOn(core, "setFailed").mockImplementation(() => {});
 });
 
 beforeEach(() => {
