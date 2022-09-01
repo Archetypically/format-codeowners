@@ -34,13 +34,6 @@ jobs:
           node-version: 16
           cache: 'yarn'
 
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        id: cache-node-modules
-        with:
-          path: ./actions/rotate-access-token/node_modules
-          key: ${{ runner.os }}-rotate-access-token-nm-${{ hashFiles('yarn.lock') }}
-
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
