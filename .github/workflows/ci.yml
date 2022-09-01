@@ -16,33 +16,28 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.revision }}
 
-      - name: setup node
+      - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'yarn'
 
-      - name: install dependencies
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: install
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
-      - name: run format checks
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: 'format:check'
+      - name: Run format checks
+        if: success() || failure()
+        run: 'yarn format:check'
 
-      - name: run linter
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: 'lint:check'
+      - name: Run linter
+        if: success() || failure()
+        run: 'yarn lint:check'
 
-      - name: run tests
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: 'test'
+      - name: Run tests
+        if: success() || failure()
+        run: 'yarn test'
