@@ -18,6 +18,15 @@ const TEST_CODEOWNERS_FILE_CONTENTS = String(
     "there/is/a/lot/of/white/space/here.txt              @user6              @user7                      @user8\n"
 );
 
+beforeAll(() => {
+  jest.spyOn(core, 'debug').mockImplementation(() => {});
+  jest.spyOn(core, 'info').mockImplementation(() => {});
+  jest.spyOn(core, 'error').mockImplementation(() => {});
+  jest.spyOn(core, 'notice').mockImplementation(() => {});
+  jest.spyOn(core, 'setOutput').mockImplementation(() => {});
+  jest.spyOn(core, 'setFailed').mockImplementation(() => {});
+});
+
 beforeEach(() => {
   jest.resetAllMocks();
 });
