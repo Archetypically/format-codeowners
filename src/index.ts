@@ -107,6 +107,7 @@ export function main() {
     const changedFiles: string[] = [];
     newCodeowners.forEach((fileContents, index) => {
       if (currentCodeowners[index].contents !== fileContents.contents) {
+        core.notice(`Changed detected for '${fileContents.path}'.`);
         changedFiles.push(fileContents.path);
         writeToFile(fileContents, "CODEOWNERS");
       } else {
