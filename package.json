@@ -42,7 +42,31 @@
     "verbose": true
   },
   "eslintConfig": {
-    "extends": "eslint:recommended"
+    "extends": "eslint:recommended",
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "jest"
+    ],
+    "env": {
+      "jest/globals": true,
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+        }
+      ]
+    }
   },
   "prettier": {
     "printWidth": 100
@@ -54,6 +78,7 @@
     "@typescript-eslint/parser": "^5.36.1",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-jest": "^27.0.1",
     "jest": "^29.0.1",
     "prettier": "2.7.1",
     "ts-jest": "^28.0.8"

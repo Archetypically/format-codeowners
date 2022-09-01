@@ -96,7 +96,7 @@ describe("getFileContents", () => {
 
 describe("formatContents", () => {
   class FakeFormatter extends LineFormatter {
-    formatLine(line: string, maxLength: number) {
+    formatLine(line: string, _maxLength: number) {
       return line;
     }
   }
