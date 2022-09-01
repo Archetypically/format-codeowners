@@ -1,6 +1,8 @@
 # format-codeowners
 
-This repository holds the Action definition for formatting a `CODEOWNERS` file.
+[![CI](https://github.com/Archetypically/format-codeowners/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Archetypically/format-codeowners/actions/workflows/ci.yml)
+
+This GitHub Action will clean up and format your CODEOWNERS file.
 
 ## Usage
 
