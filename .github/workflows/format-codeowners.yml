@@ -19,6 +19,11 @@ on:
         required: false
         default: .github/CODEOWNERS
         type: string
+      remove-empty-lines:
+        description: Whether or not to remove empty lines. Defaults to 'false'.
+        type: boolean
+        default: false
+        required: false
 
 permissions:
   contents: write
