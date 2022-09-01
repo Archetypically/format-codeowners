@@ -6,8 +6,6 @@ import * as core from "@actions/core";
 
 import { LineFormatter, getAppropriateFormatter } from "./formatters";
 
-const GHA_MODE = process.env.GITHUB_ACTIONS || "";
-
 interface FileContentMapping {
   path: string;
   contents: string;
@@ -117,6 +115,6 @@ export function main() {
   }
 }
 
-if (GHA_MODE) {
+if (process.env.NODE_ENV !== "test") {
   main();
 }
