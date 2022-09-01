@@ -105,9 +105,15 @@ export function main() {
       return formatContents(formatter, fileContents, shouldRemoveEmptyLines);
     });
 
-    newCodeowners.forEach((fileContents) => {
-      writeToFile(fileContents, "CODEOWNERS");
+    const changedFiles: string[] = [];
+    newCodeowners.forEach((fileContents, index) => {
+      if (currentCodeowners[index].contents !== fileContents.contents) {
+        changedFiles.push(fileContents.path);
+        writeToFile(fileContents, "CODEOWNERS");
+      }
     });
+
+    core.setOutput('formatted-files', changedFiles.join(' '));
   } catch (error: any) {
     core.debug(inspect(error));
     core.setOutput("success", false);

@@ -107,9 +107,14 @@ function main() {
         const newCodeowners = currentCodeowners.map((fileContents) => {
             return formatContents(formatter, fileContents, shouldRemoveEmptyLines);
         });
-        newCodeowners.forEach((fileContents) => {
-            writeToFile(fileContents, "CODEOWNERS");
+        const changedFiles = [];
+        newCodeowners.forEach((fileContents, index) => {
+            if (currentCodeowners[index].contents !== fileContents.contents) {
+                changedFiles.push(fileContents.path);
+                writeToFile(fileContents, "CODEOWNERS");
+            }
         });
+        core.setOutput('formatted-files', changedFiles.join(' '));
     }
     catch (error) {
         core.debug((0, util_1.inspect)(error));

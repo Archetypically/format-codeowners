@@ -5,7 +5,7 @@
   "main": "compiled/index.js",
   "scripts": {
     "compile": "tsc",
-    "preaction": "tsc",
+    "preaction": "tsc && cp development/CODEOWNERS.unformatted development/CODEOWNERS",
     "action": "env $(cat development/.env.development) node compiled/index.js",
     "format": "prettier --write **/*.ts",
     "format:check": "prettier --check **/*.ts",

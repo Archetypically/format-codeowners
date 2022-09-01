@@ -189,11 +189,14 @@ describe("main", () => {
     mockGetInput.mockReturnValueOnce("test/fixtures/CODEOWNERS.unformatted");
     mockGetInput.mockReturnValueOnce("one-space");
 
+    const mockSetOutput = jest.spyOn(core, "setOutput");
+
     main();
 
     const unformattedContents = fs.readFileSync("test/fixtures/CODEOWNERS", "utf8");
     const formattedContents = fs.readFileSync("test/fixtures/CODEOWNERS.one-space", "utf8");
     expect(unformattedContents).toEqual(formattedContents);
+    expect(mockSetOutput).toHaveBeenCalledWith("formatted-files", "test/fixtures/CODEOWNERS.unformatted");
   });
 
   test("properly formats using lined-up", () => {
@@ -201,11 +204,15 @@ describe("main", () => {
     mockGetInput.mockReturnValueOnce("test/fixtures/CODEOWNERS.unformatted");
     mockGetInput.mockReturnValueOnce("lined-up");
 
+    const mockSetOutput = jest.spyOn(core, "setOutput");
+
     main();
 
     const unformattedContents = fs.readFileSync("test/fixtures/CODEOWNERS", "utf8");
     const formattedContents = fs.readFileSync("test/fixtures/CODEOWNERS.lined-up", "utf8");
     expect(unformattedContents).toEqual(formattedContents);
+
+    expect(mockSetOutput).toHaveBeenCalledWith("formatted-files", "test/fixtures/CODEOWNERS.unformatted");
   });
 
   test("properly formats using remove-empty-lines", () => {
@@ -213,6 +220,8 @@ describe("main", () => {
     mockGetInput.mockReturnValueOnce("test/fixtures/CODEOWNERS.unformatted");
     mockGetInput.mockReturnValueOnce("one-space");
     mockGetInput.mockReturnValueOnce("true");
+
+    const mockSetOutput = jest.spyOn(core, "setOutput");
 
     main();
 
@@ -222,6 +231,7 @@ describe("main", () => {
       "utf8"
     );
     expect(unformattedContents).toEqual(formattedContents);
+    expect(mockSetOutput).toHaveBeenCalledWith("formatted-files", "test/fixtures/CODEOWNERS.unformatted");
   });
 });
 

@@ -1,10 +1,13 @@
 ---
 name: 'Format CODEOWNERS'
 author: '@Archetypically'
+
+description: Formats CODEOWNERS files. Does not commit any files.
+
 branding:
   icon: file-text
   color: yellow
-description: Formats CODEOWNERS files. Does not commit any files.
+
 inputs:
   format-style:
     description: The style of format to apply.
@@ -24,6 +27,12 @@ inputs:
     description: Whether or not to remove empty lines.
     required: false
     default: false
+
+outputs:
+  formatted-files:
+    description: |
+      A space-separated list of files that were changed in some way.
+      If a file was not changed, it will not appear in this list.
 
 runs:
   using: 'node16'
