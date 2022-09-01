@@ -113,7 +113,12 @@ export function main() {
       }
     });
 
-    core.setOutput('formatted-files', changedFiles.join(' '));
+    core.setOutput("formatted-files", changedFiles.join(" "));
+    if (changedFiles.length > 0) {
+      core.notice(`Made changes to the following files: ${changedFiles}`);
+    } else {
+      core.notice("No changes were made to any files.");
+    }
   } catch (error: any) {
     core.debug(inspect(error));
     core.setOutput("success", false);
