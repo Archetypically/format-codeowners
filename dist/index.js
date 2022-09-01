@@ -149,7 +149,6 @@ function writeToFile(fileContent, newFileName = "CODEOWNERS") {
         ? `${fileContent.path.substring(0, fileContent.path.lastIndexOf("/"))}/${newFileName}`
         : fileContent.path;
     fs.writeFileSync(newFilePath, fileContent.contents);
-    core.info(`Successfully reformatted file at '${fileContent.path}'.`);
 }
 exports.writeToFile = writeToFile;
 function main() {
@@ -174,11 +173,21 @@ function main() {
         const changedFiles = [];
         newCodeowners.forEach((fileContents, index) => {
             if (currentCodeowners[index].contents !== fileContents.contents) {
+                core.notice(`Changed detected for '${fileContents.path}'.`);
                 changedFiles.push(fileContents.path);
                 writeToFile(fileContents, "CODEOWNERS");
             }
+            else {
+                core.notice(`No changes detected for '${fileContents.path}'`);
+            }
         });
-        core.setOutput('formatted-files', changedFiles.join(' '));
+        core.setOutput("formatted-files", changedFiles.join(" "));
+        if (changedFiles.length > 0) {
+            core.notice(`Made changes to the following files: ${changedFiles}`);
+        }
+        else {
+            core.notice("No changes were made to any files.");
+        }
     }
     catch (error) {
         core.debug((0, util_1.inspect)(error));
