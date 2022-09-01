@@ -84,6 +84,8 @@ Note: this Action will not commit files back to the repository; you can use some
 
 ## Development
 
+_This repository intentionally does not use `act` for local development to reduce complexity._
+
 Inputs are controlled via environment variables defined in `development/.env.development`.
 
 Run the action using:
@@ -99,3 +101,11 @@ Run the tests using:
 ```shell
 yarn test
 ```
+
+## Credits
+
+- [Evan Lee](https://evanlee.engineer) ([@Archetypically](https://github.com/Archetypically))
+
+## License
+
+This project is licensed under the MIT License - see the [`LICENSE`](LICENSE) file for details.
