@@ -17,7 +17,7 @@ on:
           Optional. The path to the CODEOWNERS file to operate on.
           Otherwise searches for valid CODEOWNERS files in the repository.
         required: false
-        default: CODEOWNERS
+        default: .github/CODEOWNERS
         type: string
 
 permissions:
@@ -28,7 +28,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: ./
         with:
           format-style: ${{ github.event.inputs.format-style }}
           file-path: ${{ github.event.inputs.file-path }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Reformat CODEOWNERS
+          commit_options: '--no-verify --signoff'
+          file_pattern: CODEOWNERS .github/CODEOWNERS docs/CODEOWNERS
+          disable_globbing: true
