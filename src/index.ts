@@ -80,7 +80,6 @@ export function writeToFile(fileContent: FileContentMapping, newFileName = "CODE
     : fileContent.path;
 
   fs.writeFileSync(newFilePath, fileContent.contents);
-  core.info(`Successfully reformatted file at '${fileContent.path}'.`);
 }
 
 export function main() {
@@ -110,6 +109,8 @@ export function main() {
       if (currentCodeowners[index].contents !== fileContents.contents) {
         changedFiles.push(fileContents.path);
         writeToFile(fileContents, "CODEOWNERS");
+      } else {
+        core.notice(`No changes detected for '${fileContents.path}'`);
       }
     });
 
