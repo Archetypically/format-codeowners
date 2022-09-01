@@ -9,6 +9,9 @@ on:
         required: false
         default: main
 
+permissions:
+  contents: read
+
 jobs:
   ci:
     runs-on: ubuntu-latest
