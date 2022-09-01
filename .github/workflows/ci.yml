@@ -55,4 +55,6 @@ jobs:
 
       - name: Run tests
         if: success() || failure()
+        env:
+          NODE_ENV: test
         run: 'yarn test'
