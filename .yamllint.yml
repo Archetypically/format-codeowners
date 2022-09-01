@@ -1,0 +1,20 @@
+---
+extends: default
+
+ignore: |
+  **/node_modules/**/*.yml
+
+rules:
+  line-length:
+    max: 100
+    level: warning
+
+  # accept both     key:
+  #                   - item
+  #
+  # and             key:
+  #                 - item
+  indentation:
+    indent-sequences: whatever
+
+  truthy: disable
