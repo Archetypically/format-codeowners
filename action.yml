@@ -1,0 +1,30 @@
+---
+name: 'Format CODEOWNERS'
+author: '@Archetypically'
+branding:
+  icon: file-text
+  colour: yellow
+description: Formats CODEOWNERS files. Does not commit any files.
+inputs:
+  format-style:
+    description: The style of format to apply.
+    required: true
+    default: 'lined-up'
+    choices:
+      - 'lined-up'
+      - 'one-space'
+  file-path:
+    description: |
+      The path to the CODEOWNERS file to operate on.
+      Otherwise searches for valid CODEOWNERS files as described in:
+      https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location.
+    required: false
+    default: CODEOWNERS
+  remove-empty-lines:
+    description: Whether or not to remove empty lines.
+    required: false
+    default: false
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

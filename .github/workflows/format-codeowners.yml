@@ -1,0 +1,34 @@
+---
+name: Format CODEOWNERS
+
+on:
+  workflow_dispatch:
+    inputs:
+      format-style:
+        description: 'The style of format to apply.'
+        required: true
+        default: 'lined-up'
+        type: choice
+        choices:
+          - 'lined-up'
+          - 'one-space'
+      file-path:
+        description: |
+          Optional. The path to the CODEOWNERS file to operate on.
+          Otherwise searches for valid CODEOWNERS files in the repository.
+        required: false
+        default: CODEOWNERS
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  format-codeowners:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          format-style: ${{ github.event.inputs.format-style }}
+          file-path: ${{ github.event.inputs.file-path }}

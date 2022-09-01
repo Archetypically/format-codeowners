@@ -1,0 +1,9 @@
+# this is a comment and should    be ignored
+path/to/file1.txt @user1 @user2
+this/will/be/a/very/long/path/to/a/file/wow/long @user3 @user4
+
+bare-file.txt @user5
+
+
+
+there/is/a/lot/of/white/space/here.txt              @user6              @user7                      @user8
