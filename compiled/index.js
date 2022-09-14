@@ -59,7 +59,7 @@ function formatContents(formatter, fileContents, removeEmptyLines = false) {
         return !line.startsWith("#") && line.length > 0;
     })
         .map((line) => {
-        const [path, ..._] = line.split(" ");
+        const [path, ..._] = line.trim().split(/\s+/);
         return path.length;
     });
     const maxLineLength = Math.max(...lineLengths);

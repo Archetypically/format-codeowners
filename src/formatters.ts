@@ -22,7 +22,9 @@ export class LinedUpFormatter extends LineFormatter {
       return line;
     }
 
-    const [path, ...owners] = line.split(" ").filter(String);
+    const [path, ...owners] = line.trim().split(/\s+/).filter(String);
+    console.log(path);
+    console.log(maxLength);
     const newPath = path.padEnd(maxLength, " ");
     const formattedOwners = owners.join(" ");
 
