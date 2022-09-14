@@ -28,7 +28,9 @@ class LinedUpFormatter extends LineFormatter {
         if (line.startsWith("#") || line.length === 0) {
             return line;
         }
-        const [path, ...owners] = line.split(" ").filter(String);
+        const [path, ...owners] = line.trim().split(/\s+/).filter(String);
+        console.log(path);
+        console.log(maxLength);
         const newPath = path.padEnd(maxLength, " ");
         const formattedOwners = owners.join(" ");
         return `${newPath} ${formattedOwners}`;
@@ -123,7 +125,7 @@ function formatContents(formatter, fileContents, removeEmptyLines = false) {
         return !line.startsWith("#") && line.length > 0;
     })
         .map((line) => {
-        const [path, ..._] = line.split(" ");
+        const [path, ..._] = line.trim().split(/\s+/);
         return path.length;
     });
     const maxLineLength = Math.max(...lineLengths);
